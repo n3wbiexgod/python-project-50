@@ -1,13 +1,18 @@
-import json
+from gendiff.parsers import parse
+
 
 def read_file(path):
     with open(path) as f:
-        return json.load(f)
+        return f.read()
+
+
+def get_format(path):
+    return path.split(".")[-1]
 
 
 def generate_diff(file1, file2):
-    data1 = read_file(file1)
-    data2 = read_file(file2)
+    data1 = parse(read_file(file1), get_format(file1))
+    data2 = parse(read_file(file2), get_format(file2))
 
     keys = sorted(set(data1) | set(data2))
 
