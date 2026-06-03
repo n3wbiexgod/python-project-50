@@ -1,14 +1,17 @@
-def format_value(value):
+def stringify(value):
     if isinstance(value, dict):
         return "[complex value]"
-    if isinstance(value, str):
-        return f"'{value}'"
-    if value is None:
-        return "null"
+
     if value is True:
         return "true"
     if value is False:
         return "false"
+    if value is None:
+        return "null"
+
+    if isinstance(value, str):
+        return f"'{value}'"
+
     return str(value)
 
 
@@ -17,28 +20,29 @@ def format_plain(diff, path=""):
 
     for node in diff:
         key = node["key"]
-        property_path = f"{path}.{key}" if path else key
-        t = node["type"]
+        type_ = node["type"]
 
-        if t == "nested":
-            lines.extend(format_plain(node["children"], property_path))
+        full_path = f"{path}.{key}" if path else key
 
-        elif t == "added":
-            value = format_value(node["value"])
+        if type_ == "nested":
+            lines.append(format_plain(node["children"], full_path))
+
+        elif type_ == "added":
+            value = stringify(node["value"])
             lines.append(
-                f"Property '{property_path}' was added with value: {value}"
+                f"Property '{full_path}' was added with value: {value}"
             )
 
-        elif t == "removed":
+        elif type_ == "removed":
             lines.append(
-                f"Property '{property_path}' was removed"
+                f"Property '{full_path}' was removed"
             )
 
-        elif t == "changed":
-            old = format_value(node["old_value"])
-            new = format_value(node["new_value"])
+        elif type_ == "changed":
+            old = stringify(node["old_value"])
+            new = stringify(node["new_value"])
             lines.append(
-                f"Property '{property_path}' was updated. From {old} to {new}"
+                f"Property '{full_path}' was updated. From {old} to {new}"
             )
 
     return "\n".join(lines)
