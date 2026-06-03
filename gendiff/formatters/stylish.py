@@ -1,16 +1,25 @@
-def format_value(value, depth):
+def stringify(value, depth):
+    indent = "    " * depth
+
     if isinstance(value, dict):
-        indent = " " * (depth * 4)
         lines = ["{"]
         for k, v in value.items():
-            lines.append(f"{indent}    {k}: {v}")
+            lines.append(f"{indent}    {k}: {stringify(v, depth + 1)}")
         lines.append(f"{indent}}}")
         return "\n".join(lines)
+
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    if value is None:
+        return "null"
+
     return str(value)
 
 
 def format_stylish(diff, depth=0):
-    indent = " " * (depth * 4)
+    indent = "    " * depth
     lines = ["{"]
 
     for node in diff:
@@ -22,17 +31,23 @@ def format_stylish(diff, depth=0):
             lines.append(f"{indent}    {key}: {value}")
 
         elif t == "added":
-            lines.append(f"{indent}  + {key}: {node['value']}")
+            value = stringify(node["value"], depth + 1)
+            lines.append(f"{indent}  + {key}: {value}")
 
         elif t == "removed":
-            lines.append(f"{indent}  - {key}: {node['value']}")
+            value = stringify(node["value"], depth + 1)
+            lines.append(f"{indent}  - {key}: {value}")
 
         elif t == "unchanged":
-            lines.append(f"{indent}    {key}: {node['value']}")
+            value = stringify(node["value"], depth + 1)
+            lines.append(f"{indent}    {key}: {value}")
 
         elif t == "changed":
-            lines.append(f"{indent}  - {key}: {node['old_value']}")
-            lines.append(f"{indent}  + {key}: {node['new_value']}")
+            old = stringify(node["old_value"], depth + 1)
+            new = stringify(node["new_value"], depth + 1)
+
+            lines.append(f"{indent}  - {key}: {old}")
+            lines.append(f"{indent}  + {key}: {new}")
 
     lines.append(indent + "}")
     return "\n".join(lines)
