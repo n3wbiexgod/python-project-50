@@ -1,5 +1,6 @@
 # Python Project 50
-
+## Badges
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=n3wbiexgod_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=n3wbiexgod_python-project-50)
 # Вычислитель отличий (gendiff)
 ***
 ![Hexlet Badge](https://img.shields.io/badge/Hexlet-116EF5?logo=hexlet&logoColor=fff&style=for-the-badge)
