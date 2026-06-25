@@ -1,7 +1,7 @@
 [project]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Difference calculator (gendiff)"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -10,12 +10,17 @@ dependencies = [
 
 [project.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "pytest>=9.0.3",
     "ruff>=0.15.15",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gendiff*"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
