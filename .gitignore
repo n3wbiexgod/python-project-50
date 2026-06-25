@@ -2,6 +2,3 @@ __pycache__/
 *.pyc
 *.egg-info/
 .venv/
-
-file1.json
-file2.json
