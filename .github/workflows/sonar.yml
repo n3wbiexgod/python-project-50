@@ -27,7 +27,10 @@ jobs:
           pip install poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-interaction
+
+      - name: Install project in editable mode
+        run: poetry run pip install -e .
 
       - name: Run tests with coverage
         run: poetry run pytest --cov=gendiff --cov-report=xml
