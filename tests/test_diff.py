@@ -1,6 +1,5 @@
+import subprocess
 import sys
-
-from gendiff.cli import main
 from gendiff.diff_builder import generate_diff
 
 
@@ -42,18 +41,18 @@ def test_json_format():
     assert "common" in result or "host" in result
 
 
-def test_cli(capsys, monkeypatch):
-    monkeypatch.setattr(
-        sys,
-        "argv",
+def test_cli():
+    result = subprocess.run(
         [
+            sys.executable,
+            "-m",
             "gendiff",
             "tests/test_data/file1.json",
             "tests/test_data/file2.json",
         ],
+        capture_output=True,
+        text=True,
     )
 
-    main()
-
-    output = capsys.readouterr().out
-    assert output
+    assert result.returncode == 0
+    assert result.stdout
