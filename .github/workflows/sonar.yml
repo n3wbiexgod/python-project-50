@@ -1,43 +1,13 @@
-name: SonarCloud
+- name: Run tests with coverage
+  run: |
+    poetry run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build:
-    name: Build and analyze
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          poetry install
-
-      - name: Run tests with coverage
-        run: |
-          poetry run pytest --cov=gendiff --cov-report=xml
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=n3wbiexgod_python-project-50
-            -Dsonar.organization=n3wbiexgod
-            -Dsonar.python.coverage.reportPaths=coverage.xml
+- name: SonarCloud Scan
+  uses: SonarSource/sonarcloud-github-action@v2
+  env:
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  with:
+    args: >
+      -Dsonar.projectKey=n3wbiexgod_python-project-50
+      -Dsonar.organization=n3wbiexgod
+      -Dsonar.python.coverage.reportPaths=coverage.xml
