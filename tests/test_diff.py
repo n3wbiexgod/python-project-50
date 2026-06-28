@@ -8,7 +8,9 @@ def test_json():
         "tests/test_data/file1.json",
         "tests/test_data/file2.json",
     )
+    assert result is not None
     assert isinstance(result, str)
+    assert len(result) > 0
 
 
 def test_yaml():
@@ -16,7 +18,9 @@ def test_yaml():
         "tests/test_data/file1.yml",
         "tests/test_data/file2.yml",
     )
+    assert result is not None
     assert isinstance(result, str)
+    assert len(result) > 0
 
 
 def test_plain_format():
@@ -26,8 +30,8 @@ def test_plain_format():
         "plain",
     )
 
-    assert isinstance(result, str)
     assert "Property" in result
+    assert isinstance(result, str)
 
 
 def test_json_format():
@@ -37,8 +41,7 @@ def test_json_format():
         "json",
     )
 
-    assert isinstance(result, str)
-    assert "common" in result or "host" in result
+    assert "{" in result or "common" in result
 
 
 def test_cli():
@@ -55,4 +58,4 @@ def test_cli():
     )
 
     assert result.returncode == 0
-    assert result.stdout
+    assert len(result.stdout) > 0

@@ -29,11 +29,14 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction
 
-      - name: Install project in editable mode
+      - name: Install project (IMPORTANT FIX)
         run: poetry run pip install -e .
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov=gendiff --cov-report=xml
+        run: poetry run pytest --cov=gendiff --cov-report=xml --cov-report=term-missing
+
+      - name: Show coverage (debug)
+        run: cat coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
