@@ -40,4 +40,5 @@ jobs:
           args: >
             -Dsonar.projectKey=n3wbiexgod_python-project-50
             -Dsonar.organization=n3wbiexgod
-            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.sources=gendiff
+            -Dsonar.python.coverage.reportPaths=./coverage.xml
