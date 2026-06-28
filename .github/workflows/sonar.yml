@@ -2,25 +2,24 @@ name: SonarCloud
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build and analyze
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -29,8 +28,7 @@ jobs:
           poetry install
 
       - name: Run tests with coverage
-        run: |
-          poetry run pytest --cov=gendiff --cov-report=xml:coverage.xml
+        run: poetry run pytest --cov=gendiff --cov-report=xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
@@ -40,4 +38,6 @@ jobs:
           args: >
             -Dsonar.projectKey=n3wbiexgod_python-project-50
             -Dsonar.organization=n3wbiexgod
-            -Dsonar.python.coverage.reportPaths=./coverage.xml
+            -Dsonar.sources=gendiff
+            -Dsonar.tests=tests
+            -Dsonar.python.coverage.reportPaths=coverage.xml
