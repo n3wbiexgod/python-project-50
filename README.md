@@ -1,12 +1,13 @@
 # Python Project 50
 ## Badges
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=n3wbiexgod_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=n3wbiexgod_python-project-50)
-# Вычислитель отличий (gendiff)
-***
-![Hexlet Badge](https://img.shields.io/badge/Hexlet-116EF5?logo=hexlet&logoColor=fff&style=for-the-badge)
-[![Actions Status](https://github.com/n3wbiexgod/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/n3wbiexgod/python-project-50/actions)
 
-__"Вычислитель отличий" (gendiff)__ - второй проект, разработанный в рамках обучения на курсе Хекслет. Это инструмент командной строки для поиска различий между двумя файлами.
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=n3wbiexgod_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=n3wbiexgod_python-project-50)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=n3wbiexgod_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=n3wbiexgod_python-project-50)
+
+[![Hexlet Badge](https://img.shields.io/badge/Hexlet-116EF5?logo=hexlet&logoColor=fff&style=for-the-badge)](https://ru.hexlet.io)
+
+[![Actions Status](https://github.com/n3wbiexgod/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/n3wbiexgod/python-project-50/actions)
 
 ***
 
